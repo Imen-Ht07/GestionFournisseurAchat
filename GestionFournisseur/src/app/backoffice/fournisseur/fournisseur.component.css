@@ -1,0 +1,185 @@
+/* Effet néomorphique "carte flottante" */
+.fournisseur-card.glass-card {
+  background: rgba(255,255,255,0.94);
+  border-radius: 30px;
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.13), 0 1.5px 8px 0 #dbeafe;
+  border: 1.5px solid #e0e7ef;
+  transition: box-shadow 0.23s, transform 0.19s;
+  position: relative;
+}
+
+.fournisseur-card.glass-card:hover {
+  box-shadow: 0 12px 38px 0 #2563eb33, 0 1.5px 14px 0 #a5b4fc33;
+  transform: translateY(-6px) scale(1.02);
+  border-color: #60a5fa;
+  z-index: 2;
+}
+
+/* Avatar circulaire avec initiale */
+.avatar-circle {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#3b82f6 60%,#0ea5e9 100%);
+  box-shadow: 0 3px 10px #93c5fd44;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.avatar-text {
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Nom du fournisseur */
+.fournisseur-nom {
+  letter-spacing: 0.7px;
+  color: #1e293b;
+  font-size: 1.16rem;
+}
+
+/* Étoiles animées */
+.star-rating .bi-star-fill,
+.star-rating .bi-star {
+  transition: color 0.17s, transform 0.18s;
+}
+.star-rating .star-animate {
+  animation: star-pop 0.36s cubic-bezier(0.4, 1.7, 0.7, 1.2);
+}
+@keyframes star-pop {
+  0%   { transform: scale(0.6) rotate(-15deg);}
+  60%  { transform: scale(1.3) rotate(7deg);}
+  100% { transform: scale(1) rotate(0);}
+}
+
+/* Bouton "Ajouter" gradient */
+.btn-gradient {
+  background: linear-gradient(90deg,#3b82f6 60%,#0ea5e9 100%);
+  color: #fff !important;
+  border: none;
+  border-radius: 2em;
+  font-size: 1.04rem;
+  font-weight: 600;
+  padding: 0.68em 2.4em;
+  box-shadow: 0 2px 10px #3b82f633;
+  transition: background 0.21s, box-shadow 0.18s;
+}
+.btn-gradient:hover {
+  background: linear-gradient(90deg,#2563eb 60%,#38bdf8 100%);
+  box-shadow: 0 4px 18px #2563eb33;
+}
+
+/* Bouton fab delete rond flottant */
+.btn-fab.delete-fab {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg,#f43f5e 60%,#fbbf24 110%);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.32rem;
+  box-shadow: 0 2px 8px #f43f5e44;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+  z-index: 10;
+}
+.btn-fab.delete-fab:hover {
+  background: linear-gradient(135deg,#b91c1c 60%,#fbbf24 110%);
+  transform: scale(1.1) rotate(-11deg);
+  box-shadow: 0 3px 16px #b91c1c33;
+}
+
+/* Icônes */
+.text-gradient {
+  background: linear-gradient(90deg,#60a5fa,#38bdf8 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .fournisseur-card.glass-card {
+    border-radius: 18px;
+    padding: 5px;
+  }
+  .btn-fab.delete-fab {
+    bottom: 16px;
+    right: 16px;
+    width: 38px; height: 38px;
+    font-size: 1.06rem;
+  }
+  .avatar-circle {
+    width: 44px; height: 44px;
+    font-size: 1.3rem;
+  }
+}
+/* ... ton style existant ... */
+
+/* Barre de recherche premium */
+.search-bar-modern {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 2em;
+  box-shadow: 0 2px 14px #3b82f633;
+  padding: 0.1em 1.2em 0.1em 1.1em;
+  position: relative;
+  border: 1.5px solid #e0e7ef;
+  transition: box-shadow 0.15s, border 0.15s;
+}
+
+.search-bar-modern:focus-within {
+  box-shadow: 0 4px 24px #2563eb33;
+  border-color: #2563eb;
+}
+
+.search-icon {
+  font-size: 1.4em;
+  color: #2563eb;
+  opacity: 0.8;
+  margin-right: 0.7em;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1.12em;
+  color: #1e293b;
+  padding: 0.7em 0;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+  font-weight: 400;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 1.2em;
+  padding: 0 0.3em;
+  border-radius: 50%;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background: #fef2f2;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .search-bar-modern {
+    padding: 0.1em 0.7em 0.1em 0.8em;
+    font-size: 0.97em;
+  }
+  .search-icon { font-size: 1.1em; }
+}

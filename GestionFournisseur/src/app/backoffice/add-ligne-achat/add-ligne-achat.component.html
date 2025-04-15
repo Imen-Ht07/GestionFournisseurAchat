@@ -1,0 +1,58 @@
+<form [formGroup]="commandeForm" (ngSubmit)="onSubmit()" class="commande-form-card">
+  <h2>Nouvelle commande d'achat</h2>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Fournisseur</label>
+      <select formControlName="fournisseur" required>
+        <option value="" disabled selected>Choisir un fournisseur</option>
+        <option *ngFor="let f of fournisseurs" [ngValue]="f">{{f.nom}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Date de livraison</label>
+      <input type="date" formControlName="date" required />
+    </div>
+    <div class="form-group">
+      <label>Statut</label>
+      <select formControlName="statut" required>
+        <option *ngFor="let statut of statutOptions" [value]="statut">{{statut}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-array" formArrayName="lignes">
+    <label class="array-label">Lignes de commande</label>
+    <div *ngFor="let ligne of lignes.controls; let i = index" [formGroupName]="i" class="ligne-card">
+      <div class="ligne-fields">
+        <div>
+          <label>Produit</label>
+          <input type="text" formControlName="produit" required />
+        </div>
+        <div>
+          <label>Quantité</label>
+          <input type="number" formControlName="quantite" min="1" required />
+        </div>
+        <div>
+          <label>Prix unitaire</label>
+          <input type="number" formControlName="prixUnitaire" min="0" required />
+        </div>
+        <button type="button" class="remove-btn" (click)="removeLigne(i)" title="Supprimer cette ligne">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <button type="button" class="add-btn" (click)="addLigne()">
+      + Ajouter une ligne
+    </button>
+  </div>
+
+  <div class="form-group total-row">
+    <label>Montant total</label>
+    <input type="number" formControlName="montant" readonly />
+  </div>
+
+  <button type="submit" class="submit-btn" [disabled]="!commandeForm.valid">Valider la commande</button>
+
+  <div *ngIf="successMessage" class="success-message">{{successMessage}}</div>
+  <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
+</form>

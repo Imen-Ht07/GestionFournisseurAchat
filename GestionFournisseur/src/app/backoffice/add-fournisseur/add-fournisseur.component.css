@@ -1,0 +1,92 @@
+.form-card {
+  max-width: 440px;
+  width: 100%;
+  background: #fff;
+  border-radius: 1.7em;
+  padding: 2.6em 2em 2em 2em;
+  box-shadow: 0 6px 32px #60a5fa22, 0 1.5px 11px #dbeafe;
+  animation: fadeInUp 0.7s;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px);}
+  to   { opacity: 1; transform: none;}
+}
+
+.form-label {
+  color: #2563eb;
+  font-size: 1.03rem;
+}
+
+input.form-control, .form-control:focus {
+  border-radius: 0.8em;
+  border-color: #60a5fa;
+  background: #f8fafc;
+  min-height: 2.45em;
+  font-size: 1.03rem;
+  transition: border 0.17s;
+}
+
+input.form-control.is-invalid {
+  border-color: #ef4444;
+}
+
+.invalid-feedback {
+  color: #ef4444;
+  font-size: 0.97em;
+}
+
+.star-rating .bi-star-fill,
+.star-rating .bi-star {
+  cursor: pointer;
+  transition: color 0.13s, transform 0.17s;
+}
+.star-rating .animated-star {
+  animation: bounceStar 0.35s;
+}
+@keyframes bounceStar {
+  0% { transform: scale(1.1) rotate(-10deg);}
+  60% { transform: scale(1.45) rotate(10deg);}
+  100% { transform: scale(1) rotate(0);}
+}
+
+/* Bouton gradient bleu */
+.btn-gradient {
+  background: linear-gradient(90deg,#2563eb 70%,#38bdf8 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 1.2em;
+  letter-spacing: 0.6px;
+  box-shadow: 0 5px 12px #2563eb22;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.btn-gradient:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+.btn-gradient:hover {
+  background: linear-gradient(90deg,#1e40af 60%,#38bdf8 100%);
+  box-shadow: 0 8px 22px #2563eb22;
+}
+
+/* Bouton rose outline */
+.btn-outline-rose {
+  border: 2px solid #f43f5e;
+  color: #f43f5e;
+  background: #fff;
+  font-weight: 500;
+  border-radius: 1.2em;
+  transition: background 0.13s, color 0.13s;
+}
+.btn-outline-rose:hover {
+  background: #f43f5e;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .form-card {
+    padding: 1.3em 0.7em;
+    max-width: 98vw;
+  }
+}

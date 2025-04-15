@@ -1,0 +1,74 @@
+<div class="container py-5" style="background: #f6f8fb; min-height: 100vh;">
+
+  <!-- Bouton Ajouter aligné à gauche -->
+  <div class="text-start mb-4">
+    <button
+      class="btn btn-gradient shadow add-fournisseur-btn"
+      [routerLink]="['/backoffice/addfournisseur']"
+    >
+      <i class="bi bi-plus-lg me-2"></i> Ajouter un fournisseur
+    </button>
+  </div>
+
+ <div class="row justify-content-center mb-4">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="search-bar-modern">
+      <i class="bi bi-search search-icon"></i>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Rechercher un fournisseur, un contact, un service..."
+        [(ngModel)]="searchTerm" />
+      <button
+        *ngIf="searchTerm"
+        type="button"
+        class="clear-btn"
+        (click)="searchTerm = ''"
+        title="Effacer la recherche"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+  <!-- Grille de cartes responsive, effet néomorphique -->
+  <div class="row justify-content-center g-4 mb-4">
+    <div *ngFor="let fournisseur of filteredFournisseurs" class="col-12 col-sm-10 col-md-6 col-lg-4 d-flex align-items-stretch mb-4">
+      <div class="fournisseur-card glass-card w-100 mx-auto">
+        <div class="card-body d-flex flex-column align-items-center text-center p-4 position-relative">
+          <div class="avatar-circle mb-3">
+            <span class="avatar-text">{{ fournisseur.nom?.charAt(0) | uppercase }}</span>
+          </div>
+          <h4 class="fw-bold mb-2 fournisseur-nom">{{ fournisseur.nom }}</h4>
+          <p class="text-secondary small mb-1">
+            <i class="bi bi-person-lines-fill text-gradient me-1"></i>
+            <span class="fw-medium text-dark">{{ fournisseur.contact }}</span>
+          </p>
+          <p class="text-secondary small mb-1">
+            <i class="bi bi-award text-warning me-1"></i>
+            <span class="fw-medium text-dark">{{ fournisseur.qualiteService }}</span>
+          </p>
+          <!-- Affichage des étoiles animées -->
+          <div class="star-rating mb-3">
+            <ng-container *ngFor="let star of [].constructor(5); let i = index">
+              <i class="bi"
+                 [ngClass]="i < (fournisseur?.note ?? 0) ? 'bi-star-fill star-animate' : 'bi-star'"
+                 [class.text-warning]="i < (fournisseur?.note ?? 0)"
+                 [class.text-muted]="i >= (fournisseur?.note ?? 0)"
+                 style="font-size: 1.5rem;"></i>
+            </ng-container>
+          </div>
+          <!-- Bouton supprimer stylé -->
+          <button
+            class="btn btn-fab delete-fab shadow"
+            (click)="supprimerFournisseur(fournisseur)"
+            title="Supprimer ce fournisseur"
+          >
+            <i class="bi bi-trash3"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

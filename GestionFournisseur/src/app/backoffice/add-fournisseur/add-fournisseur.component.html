@@ -1,0 +1,59 @@
+<div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh; background: #f6f8fb;">
+  <form [formGroup]="fournisseurForm" (ngSubmit)="onSubmit()" novalidate class="form-card shadow-lg">
+    <h2 class="mb-4 text-center">Ajouter un fournisseur</h2>
+    <div class="mb-3">
+      <label for="nom" class="form-label fw-semibold">Nom <span class="text-danger">*</span></label>
+      <input id="nom" class="form-control"
+        formControlName="nom"
+        [ngClass]="{'is-invalid': (f['nom'].touched || submitted) && f['nom'].invalid}" />
+      <div *ngIf="(f['nom'].touched || submitted) && f['nom'].invalid" class="invalid-feedback">
+        <div *ngIf="f['nom'].errors?.['required']">Le nom est obligatoire.</div>
+        <div *ngIf="f['nom'].errors?.['minlength']">Le nom doit avoir au moins 2 caractères.</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="contact" class="form-label fw-semibold">Contact <span class="text-danger">*</span></label>
+      <input id="contact" class="form-control"
+        formControlName="contact"
+        [ngClass]="{'is-invalid': (f['contact'].touched || submitted) && f['contact'].invalid}" />
+      <div *ngIf="(f['contact'].touched || submitted) && f['contact'].invalid" class="invalid-feedback">
+        <div *ngIf="f['contact'].errors?.['required']">Le contact est obligatoire.</div>
+        <div *ngIf="f['contact'].errors?.['pattern']">Format contact invalide (email ou numéro valide).</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="qualiteService" class="form-label fw-semibold">Qualité de Service</label>
+      <input id="qualiteService" class="form-control"
+        formControlName="qualiteService"
+        [ngClass]="{'is-invalid': (f['qualiteService'].touched || submitted) && f['qualiteService'].invalid}" />
+      <div *ngIf="(f['qualiteService'].touched || submitted) && f['qualiteService'].invalid" class="invalid-feedback">
+        <div *ngIf="f['qualiteService'].errors?.['maxlength']">Max 50 caractères.</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Note <span class="text-danger">*</span></label>
+      <div class="star-rating mb-1">
+        <ng-container *ngFor="let star of [].constructor(5); let i = index">
+          <i class="bi"
+            [ngClass]="(i < f['note'].value) ? 'bi-star-fill text-warning animated-star' : 'bi-star text-muted'"
+            (click)="setStarRating(i+1)"
+            style="font-size: 1.7rem; cursor: pointer; transition: transform 0.17s;"></i>
+        </ng-container>
+        <input type="number" formControlName="note" hidden>
+      </div>
+      <div *ngIf="(f['note'].touched || submitted) && f['note'].invalid" class="invalid-feedback d-block">
+        <div *ngIf="f['note'].errors?.['required']">La note est obligatoire.</div>
+        <div *ngIf="f['note'].errors?.['min']">Note minimale : 0.</div>
+        <div *ngIf="f['note'].errors?.['max']">Note maximale : 5.</div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between mt-4">
+      <button type="submit" class="btn btn-gradient px-4 py-2" [disabled]="fournisseurForm.invalid">
+        <i class="bi bi-check-circle me-1"></i> Ajouter
+      </button>
+      <button class="btn btn-outline-rose px-4 py-2" [routerLink]="['/backoffice/fournisseur']">
+        <i class="bi bi-arrow-left-short me-1"></i> Annuler
+      </button>
+    </div>
+  </form>
+</div>

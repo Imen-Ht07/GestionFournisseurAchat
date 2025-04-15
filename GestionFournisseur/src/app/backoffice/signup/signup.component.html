@@ -1,0 +1,68 @@
+<div class="signup-container">
+  <form [formGroup]="signupForm" (ngSubmit)="signup()" autocomplete="off" class="signup-form">
+    <h2>Créer un compte</h2>
+    <div class="form-group">
+      <label for="username">
+        <span class="material-symbols-outlined">person</span>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          required
+          placeholder="Nom d'utilisateur"
+          [class.invalid]="signupForm.get('username')?.touched && signupForm.get('username')?.invalid"
+        />
+      </label>
+      <div *ngIf="signupForm.get('username')?.touched && signupForm.get('username')?.invalid" class="error-msg">
+        Le nom d'utilisateur est requis.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">
+        <span class="material-symbols-outlined">mail</span>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          required
+          placeholder="Adresse email"
+          [class.invalid]="signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+        />
+      </label>
+      <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="error-msg">
+        Adresse email valide requise.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">
+        <span class="material-symbols-outlined">lock</span>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          required
+          placeholder="Mot de passe"
+          [class.invalid]="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+        />
+      </label>
+      <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="error-msg">
+        Le mot de passe est requis.
+      </div>
+    </div>
+    <button type="submit" [disabled]="signupForm.invalid">
+      <span class="material-symbols-outlined">person_add</span>
+      S'inscrire
+    </button>
+    <div *ngIf="error" class="error-msg" style="margin-top: 12px;">
+      {{ error }}
+    </div>
+    <p class="switch-link">
+      Déjà un compte ?
+      <a routerLink="/signin">Se connecter</a>
+    </p>
+  </form>
+  
+</div>
+<!-- N'oublie pas d'ajouter la police d'icônes Material dans index.html :
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+-->

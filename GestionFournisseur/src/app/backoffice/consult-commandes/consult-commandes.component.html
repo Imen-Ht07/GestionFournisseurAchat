@@ -1,0 +1,77 @@
+<div class="container py-5 commandes-bg">
+  <h2 class="mb-4 fw-bold text-center text-primary">Mes commandes passées</h2>
+
+  <!-- Add Command Button -->
+  <div class="d-flex justify-content-end mb-4">
+    <button class="btn btn-gradient shadow-lg rounded-pill px-4 py-2 fw-semibold"
+            [routerLink]="'/backoffice/addligne'">
+      <i class="bi bi-plus-circle me-2"></i> Ajouter une commande
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="text-center my-5">
+    <div class="spinner-border text-primary"></div>
+    <div>Chargement des commandes...</div>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger text-center my-3">
+    {{errorMessage}}
+  </div>
+  <div class="row justify-content-center g-4">
+    <div *ngFor="let commande of commandes" class="col-12 col-lg-10">
+      <div class="card shadow-lg border-0 rounded-5 mb-3 commande-card position-relative overflow-hidden">
+        <!-- Accent bar on the left -->
+        <div class="commande-accent"></div>
+        <div class="card-body d-flex flex-column flex-md-row align-items-center justify-content-between">
+          <div class="d-flex align-items-center mb-3 mb-md-0">
+            <div class="commande-avatar me-3 bg-gradient">
+              <i class="bi bi-box-seam"></i>
+            </div>
+            <div>
+              <div class="fw-semibold fs-5 mb-1 text-gradient">Commande n°{{commande.id}}</div>
+              <div class="text-secondary small mb-1">
+                Fournisseur : <span class="fw-medium text-dark">{{commande.fournisseur?.nom}}</span>
+              </div>
+              <div class="text-secondary small mb-1">
+                Date : <span class="fw-medium text-dark">{{commande.date | date:'dd/MM/yyyy'}}</span>
+              </div>
+              <div class="text-secondary small mb-1">
+                Statut :
+                <span class="badge px-3 py-1 fs-6"
+                      [ngClass]="{
+                        'bg-success': commande.statut === 'LIVREE',
+                        'bg-warning text-dark': commande.statut === 'EN_COURS' || commande.statut === 'EN_ATTENTE',
+                        'bg-danger': commande.statut === 'ANNULEE'
+                      }">
+                  {{commande.statut}}
+                </span>
+              </div>
+              <div class="text-secondary small">
+                Montant : <span class="fw-semibold text-dark">{{commande.montant | number:'1.2-2'}} DT</span>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex gap-2 mt-2 mt-md-0">
+            <button class="btn btn-outline-danger rounded-pill px-3 fw-semibold shadow-sm"
+                    [disabled]="commande.statut === 'ANNULEE'"
+                    (click)="annulerCommande(commande)">
+              <i class="bi bi-x-circle me-1"></i> Annuler
+            </button>
+            <button class="btn btn-gradient rounded-pill px-3 fw-semibold shadow-sm"
+                    [disabled]="commande.statut === 'ANNULEE'"
+                    (click)="modifierCommande(commande)">
+              <i class="bi bi-pencil-square me-1"></i> Modifier
+            </button>
+            <button class="btn btn-outline-secondary rounded-pill px-3 fw-semibold shadow-sm"
+                    (click)="supprimerCommande(commande)">
+              <i class="bi bi-trash me-1"></i> Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!commandes.length && !loading" class="text-center text-muted mt-5">
+      <i class="bi bi-inbox fs-1 mb-2"></i>
+      <div>Aucune commande passée pour le moment.</div>
+    </div>
+  </div>
+</div>
