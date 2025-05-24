@@ -53,7 +53,6 @@ commandeAchatRepository.deleteById(id);
         return commandeAchatRepository.save(existing);
     }
 
-
     public CommandeAchat affecterFournisseurACommande(Long commandeId, Long fournisseurId) {
         CommandeAchat commande = commandeAchatRepository.findById(commandeId)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
