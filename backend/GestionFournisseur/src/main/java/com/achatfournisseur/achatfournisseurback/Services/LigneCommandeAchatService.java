@@ -32,6 +32,18 @@ ligneComRepository.deleteById(id);
 
     @Override
     public LigneCommandeAchat updateLigne(Long id, LigneCommandeAchat ligne) {
-        return null;
+        LigneCommandeAchat existingLigne = ligneComRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("LigneCommandeAchat non trouvée avec l'id : " + id));
+
+        existingLigne.setProduit(ligne.getProduit());
+        existingLigne.setQuantite(ligne.getQuantite());
+        existingLigne.setPrixUnitaire(ligne.getPrixUnitaire());
+
+        if (ligne.getCommande() != null) {
+            existingLigne.setCommande(ligne.getCommande());
+        }
+
+        return ligneComRepository.save(existingLigne);
     }
+
 }

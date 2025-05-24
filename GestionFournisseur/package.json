@@ -1,5 +1,5 @@
 {
-  "name": "assurance-front",
+  "name": "AchatfournisseurFront",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -22,6 +22,8 @@
     "@angular/router": "^16.2.0",
     "@stripe/stripe-js": "^7.1.0",
     "@types/chart.js": "^2.9.41",
+    "AchatfournisseurFront": "file:",
+    "AchatFournisseurFront": "file:",
     "assurance-front": "file:",
     "chart.js": "^4.4.8",
     "ngx-pagination": "^6.0.3",
