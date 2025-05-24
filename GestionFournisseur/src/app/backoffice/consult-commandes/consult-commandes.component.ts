@@ -37,7 +37,6 @@ export class ConsultCommandesComponent {
       }
     });
   }
-
   annulerCommande(commande: CommandeAchat) {
     const commandeAnnulee = { ...commande, statut: 'ANNULEE' as StatutCommande };
     this.commandeService.updateCommande(commande.id, commandeAnnulee).subscribe({
@@ -49,11 +48,6 @@ export class ConsultCommandesComponent {
       }
     });
   }
-
-  modifierCommande(commande: CommandeAchat) {
-    this.router.navigate(['/edit-commande', commande.id]);
-  }
-
   supprimerCommande(commande: CommandeAchat) {
     if (!confirm('Voulez-vous vraiment supprimer cette commande ?')) return;
     this.commandeService.deleteCommande(commande.id).subscribe({

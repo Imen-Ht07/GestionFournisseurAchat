@@ -1,0 +1,72 @@
+<div class="container mt-4">
+  <h2>Modifier la commande</h2>
+
+  <form (ngSubmit)="onSubmit()" #commandeForm="ngForm">
+
+    <!-- Date -->
+    <div class="form-group mb-3">
+      <label for="date">Date</label>
+      <input
+        type="date"
+        class="form-control"
+        id="date"
+        name="date"
+        [(ngModel)]="commande.date"
+        required
+      />
+    </div>
+
+    <!-- Statut -->
+    <div class="form-group mb-3">
+      <label for="statut">Statut</label>
+      <select
+        class="form-control"
+        id="statut"
+        name="statut"
+        [(ngModel)]="commande.statut"
+        required
+      >
+        <option value="EN_ATTENTE">En attente</option>
+        <option value="EN_COURS">En cours</option>
+        <option value="LIVREE">Livrée</option>
+        <option value="ANNULEE">Annulée</option>
+      </select>
+    </div>
+
+    <!-- Montant -->
+    <div class="form-group mb-3">
+      <label for="montant">Montant</label>
+      <input
+        type="number"
+        class="form-control"
+        id="montant"
+        name="montant"
+        [(ngModel)]="commande.montant"
+        required
+        min="0"
+      />
+    </div>
+
+    <!-- Fournisseur -->
+    <div class="form-group mb-3">
+      <label for="fournisseur">Fournisseur</label>
+      <select
+        class="form-control"
+        id="fournisseur"
+        name="fournisseur"
+        [(ngModel)]="commande.fournisseur"
+        [compareWith]="compareFournisseur"
+        required
+      >
+        <option *ngFor="let f of fournisseurs" [ngValue]="f">
+          {{ f.nom }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="submit" class="btn btn-primary" [disabled]="!commandeForm.form.valid">
+      Mettre à jour
+    </button>
+  </form>
+</div>
